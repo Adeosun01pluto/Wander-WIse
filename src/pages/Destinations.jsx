@@ -67,28 +67,31 @@ const Destinations = () => {
       {/* Filters Section - Preserved original styling and functionality */}
       <section className="py-8 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center">
+          {/* On small screens, stack items vertically and center. On medium screens and up, use flex and space-between */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center justify-center sm:justify-start"> {/* Center filter icon and text on small screens */}
               <FaFilter className="h-5 w-5 text-gray-600 mr-2" />
               <span className="font-medium text-gray-700">Filters:</span>
             </div>
 
-            <div className="flex flex-wrap gap-4 flex-1">
-              <div className="relative">
+            {/* On small screens, this will stack the inputs vertically. On medium and up, it will wrap them. */}
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 flex-1">
+              <div className="relative w-full sm:w-auto"> {/* Make search input full width on small screens */}
                 <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <input
                   type="text"
                   placeholder="Search destinations..."
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" /* w-full added */
                 />
               </div>
 
+              {/* Added w-full for full width on small screens, sm:w-auto for natural width on larger screens */}
               <select
                 value={filters.continent}
                 onChange={(e) => handleFilterChange('continent', e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-auto"
               >
                 <option value="">All Continents</option>
                 <option value="Europe">Europe</option>
@@ -102,7 +105,7 @@ const Destinations = () => {
               <select
                 value={filters.budget}
                 onChange={(e) => handleFilterChange('budget', e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-auto"
               >
                 <option value="">All Budgets</option>
                 <option value="budget">Budget</option>
@@ -113,7 +116,7 @@ const Destinations = () => {
               <select
                 value={filters.season}
                 onChange={(e) => handleFilterChange('season', e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-auto"
               >
                 <option value="">All Seasons</option>
                 <option value="spring">Spring</option>
@@ -124,9 +127,10 @@ const Destinations = () => {
               </select>
             </div>
 
+            {/* Place the clear all button at the bottom center on small screens, to the right on medium screens and up */}
             <button
               onClick={() => setFilters({ continent: '', budget: '', season: '', search: '' })}
-              className="text-blue-600 hover:text-blue-800 font-medium"
+              className="text-blue-600 hover:text-blue-800 font-medium mt-4 sm:mt-0 self-center sm:self-auto" /* Added margin-top for spacing and alignment classes */
             >
               Clear All
             </button>
